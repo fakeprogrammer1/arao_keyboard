@@ -1,0 +1,74 @@
+.edit-line {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    width: 100%;
+}
+
+.araotitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    margin: 20px;
+    padding: 12px;
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.araotextbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 50%;
+    margin: 10px;
+    padding: 10px;
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.araotub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #C0C0C0;
+    color: #000000;
+    font-size: 14px;
+    cursor: pointer;
+    &.active {
+        background-color: #2196F3;
+        color: #FFFFFF;
+    }
+    &.nonactive {
+        background-color: #808080;
+    }
+}
+
+.araobutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #C0C0C0;
+    color: #000000;
+    font-size: 14px;
+    cursor: pointer;
+    &.gray {
+        background-color: #eeeeee;
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+}
