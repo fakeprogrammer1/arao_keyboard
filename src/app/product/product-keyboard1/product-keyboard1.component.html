@@ -1,144 +1,127 @@
-<p>
-    product-Keyboard1 works!
-</p>
+<body>
+    <div id="araoHeader">
+        <span class="araotitle"> タイトル入れる </span>
 
-<div class="footer">
-    <div class="araotextbox">{{ keyboardCommon.inputstring }}</div>
-</div>
-<div [ngSwitch]="currentKeyboard">
-    <div *ngSwitchCase="0">
-        <!-- -->
         <div class="footer">
-            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
+            <div class="araotextbox">{{ keyboardCommon.inputstring }}</div>
         </div>
         <div class="footer">
             <div class="araobutton gray" (click)="delCharactor()">{{ keyboardCommonStrings.deletestrings[0] }}</div>
             <span class="araobutton gray" (click)="delAllString()">{{ keyboardCommonStrings.deletestrings[1] }}</span>
         </div>
+        <div [ngSwitch]="currentKeyboard">
+            <div *ngSwitchCase="0">
+                <div class="footer">
+                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
+                </div>
+            </div>
+            <div *ngSwitchCase="1">
+                <div class="footer">
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
+                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
+                </div>
+            </div>
+            <div *ngSwitchCase="2">
+                <div class="footer">
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
+                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
+                </div>
+            </div>
+            <div *ngSwitchCase="3">
+                <div class="footer">
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
+                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
+                </div>
+            </div>
+            <div *ngSwitchDefault>
+                <div class="footer">
+                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
+                    <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="araoContent">
+        <div [ngSwitch]="currentKeyboard">
+            <div *ngSwitchCase="0">
+                <div class="footer">
+                    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.kanaLists[j])" *ngFor="let i of keyboardCommonStrings.kanaLists; index as j">
+                        {{ keyboardCommonStrings.kanaLists[j] }}
+                    </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="1">
+                <div class="footer">
+                    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.alphabetLists[j])" *ngFor="let i of keyboardCommonStrings.alphabetLists; index as j">
+                        {{ keyboardCommonStrings.alphabetLists[j] }}
+                    </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="2">
+                <div class="footer">
+                    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.numberLists[j])" *ngFor="let i of keyboardCommonStrings.numberLists; index as j">
+                        {{ keyboardCommonStrings.numberLists[j] }}
+                   </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="3">
+                <div class="footer">
+                    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.charsLists[j])" *ngFor="let i of keyboardCommonStrings.charsLists; index as j">
+                        {{ keyboardCommonStrings.charsLists[j] }}
+                    </span>
+                </div>
+            </div>
+            <div *ngSwitchDefault>
+                <div class="footer">
+                    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.kanaLists[j])" *ngFor="let i of keyboardCommonStrings.kanaLists; index as j">
+                       {{ keyboardCommonStrings.kanaLists[j] }}
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer">
+            <div class="araobutton">↓Debug用↓</div>
+        </div>
+
         <div class="footer">
             <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.kanaLists[j])" *ngFor="let i of keyboardCommonStrings.kanaLists; index as j">
-                {{ keyboardCommonStrings.kanaLists[j] }}
-            </span>
+        {{ keyboardCommonStrings.kanaLists[j] }}
+    </span>
         </div>
-    </div>
-    <div *ngSwitchCase="1">
-        <!-- -->
-        <div class="footer">
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
-            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
-        </div>
-        <div class="footer">
-            <span class="araobutton gray" (click)="delCharactor()">{{ keyboardCommonStrings.deletestrings[0] }}</span>
-            <span class="araobutton gray" (click)="delAllString()">{{ keyboardCommonStrings.deletestrings[1] }}</span>
-        </div>
+
         <div class="footer">
             <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.alphabetLists[j])" *ngFor="let i of keyboardCommonStrings.alphabetLists; index as j">
-                {{ keyboardCommonStrings.alphabetLists[j] }}
-            </span>
+        {{ keyboardCommonStrings.alphabetLists[j] }}
+    </span>
         </div>
-    </div>
-    <div *ngSwitchCase="2">
-        <!-- -->
-        <div class="footer">
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
-            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
-        </div>
-        <div class="footer">
-            <span class="araobutton gray" (click)="delCharactor()">{{ keyboardCommonStrings.deletestrings[0] }}</span>
-            <span class="araobutton gray" (click)="delAllString()">{{ keyboardCommonStrings.deletestrings[1] }}</span>
-        </div>
+
         <div class="footer">
             <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.numberLists[j])" *ngFor="let i of keyboardCommonStrings.numberLists; index as j">
-                {{ keyboardCommonStrings.numberLists[j] }}
-           </span>
+            {{ keyboardCommonStrings.numberLists[j] }}
+        </span>
         </div>
-    </div>
-    <div *ngSwitchCase="3">
-        <!-- -->
-        <div class="footer">
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
-            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
-        </div>
-        <div class="footer">
-            <span class="araobutton gray" (click)="delCharactor()">{{ keyboardCommonStrings.deletestrings[0] }}</span>
-            <span class="araobutton gray" (click)="delAllString()">{{ keyboardCommonStrings.deletestrings[1] }}</span>
-        </div>
+
         <div class="footer">
             <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.charsLists[j])" *ngFor="let i of keyboardCommonStrings.charsLists; index as j">
                 {{ keyboardCommonStrings.charsLists[j] }}
             </span>
         </div>
+
+        <div class="button">
+            <span class="button" routerLink="/products">TOPへ</span>
+        </div>
     </div>
-    <div *ngSwitchDefault>
-        <!-- -->
-        <div class="footer">
-            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[0] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] }}</span>
-            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] }}</span>
-        </div>
-        <div class="footer">
-            <div class="araobutton gray" (click)="delCharactor()">{{ keyboardCommonStrings.deletestrings[0] }}</div>
-            <span class="araobutton gray" (click)="delAllString()">{{ keyboardCommonStrings.deletestrings[1] }}</span>
-        </div>
-        <div class="footer">
-            <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.kanaLists[j])" *ngFor="let i of keyboardCommonStrings.kanaLists; index as j">
-               {{ keyboardCommonStrings.kanaLists[j] }}
-            </span>
-        </div>
-
-    </div>
-</div>
-
-<!-- 以下お試し用に残す-->
-
-<div class="footer">
-    <div class="araobutton">↓Debug用↓</div>
-</div>
-
-<div class="footer">
-    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.kanaLists[j])" *ngFor="let i of keyboardCommonStrings.kanaLists; index as j">
-        {{ keyboardCommonStrings.kanaLists[j] }}
-    </span>
-</div>
-
-<!--  
-<div class="footer">
-    <span class="araobutton gray">{{ keyboardCommonStrings.kanaLists[0] }}</span>
-    <span class="araobutton gray">{{ keyboardCommonStrings.kanaLists[1] }}</span>
-    <span class="araobutton gray">{{ keyboardCommonStrings.kanaLists[2] }}</span>
-    <span class="araobutton gray">{{ keyboardCommonStrings.kanaLists[3] }}</span>
-    <span class="araobutton gray">{{ keyboardCommonStrings.kanaLists[4] }}</span>
-</div>
--->
-
-<div class="footer">
-    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.alphabetLists[j])" *ngFor="let i of keyboardCommonStrings.alphabetLists; index as j">
-        {{ keyboardCommonStrings.alphabetLists[j] }}
-    </span>
-</div>
-
-<div class="footer">
-    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.numberLists[j])" *ngFor="let i of keyboardCommonStrings.numberLists; index as j">
-            {{ keyboardCommonStrings.numberLists[j] }}
-        </span>
-</div>
-
-<div class="footer">
-    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.charsLists[j])" *ngFor="let i of keyboardCommonStrings.charsLists; index as j">
-                {{ keyboardCommonStrings.charsLists[j] }}
-            </span>
-</div>
-
-<div class="button">
-    <span class="button" routerLink="/products">TOPへ</span>
-</div>
+</body>
