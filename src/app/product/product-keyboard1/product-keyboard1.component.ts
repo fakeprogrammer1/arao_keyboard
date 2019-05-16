@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyboardCommon } from '../../shared/models/product-Keyboard-Common';
 import { KeyboardCommonStrings } from '../../shared/models/product-Keyboard-Common';
+import { ModalComponent } from '../modal/modal.component';
+import { ModalService } from '../../shared/services/modal.service';
 import { ProductKeyboardCommonService } from '../../shared/services/product-keyboard-common.service';
+import { Subscription } from 'rxjs';
 //import { MatDialogModule } from '@angular/material';
 
 @Component({
@@ -14,9 +17,12 @@ export class ProductKeyboard1Component implements OnInit {
   keyboardCommonStrings:KeyboardCommonStrings;
   //matDialogModule:MatDialogModule;
   currentKeyboard: number;
-
+  modal = null;
+  subscription: Subscription;
+  
   constructor(
-    private productKeyboardCommonService: ProductKeyboardCommonService)
+    private productKeyboardCommonService: ProductKeyboardCommonService,
+    private modalService: ModalService)
    {
    }
 
@@ -25,20 +31,28 @@ export class ProductKeyboard1Component implements OnInit {
     this.keyboardCommonStrings = new KeyboardCommonStrings();
     //this.matDialogModule = new MatDialogModule();
     this.currentKeyboard = 0;
+    // モーダルダイアログを閉じる際のイベント処理
+    this.subscription = this.modalService.closeEventObservable.subscribe(
+      () => {
+        this.modal = null;
+      }
+    );
   }
 
   ngDoCheck(){
     this.keyboardCommon = this.productKeyboardCommonService.dataExport();
   }
-
+  
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+  
   // 一文字追加
   addCharactor(addstring: string): void{
     this.keyboardCommon = this.productKeyboardCommonService.addCharactor(addstring);
       if(this.keyboardCommon.errorcode != 0){
-      //TODO エラー用のモーダルダイアログ作成
-      console.log(" お知らせ");
-      console.log("  制限文字数を超えています");
-      console.log("  [OK]");
+      // エラー用のモーダルダイアログ作成
+      this.modal = ModalComponent;
       }
   }
 
