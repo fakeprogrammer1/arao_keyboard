@@ -74,13 +74,14 @@ export class ProductKeyboardCommonService {
   */
   delCharactor(): KeyboardCommon{
     this.keyboardCommon.errorcode = 0;
-
+    
     // 削除する文字数を取得
-    for (this.index = 0; this.keyboardCommon.inputsizes[this.index] != 0; this.index++);
+    for (this.index = 0; this.keyboardCommon.inputsizes[this.index] != 0 && this.index < this.keyboardCommon.inputsizes.length; this.index++);
 
     // 文字列から指定文字数分を削除
-    this.keyboardCommon.inputstring　= this.keyboardCommon.inputstring.slice(0, -this.keyboardCommon.inputsizes[this.index - 1]);
+    this.keyboardCommon.inputstring = this.keyboardCommon.inputstring.slice(0, -this.keyboardCommon.inputsizes[this.index - 1]);
 
+    
     // 文字数リストを更新
     this.keyboardCommon.inputsizes[this.index-1] = 0;
 
