@@ -1,0 +1,22 @@
+{
+    "CustomKeyboardDelete":"Delete",
+    "CustomKeyboardDeleteAll":"Delete all",
+    "CommonInfo":"Information",
+    "CustomKeyboardNomoreCharacterAdded":"The maximum number of characters is exceeded.",
+    "CommonConfirm":"Confirmation",
+    "CustomKeyboardUseDefaultBleDeviceName":"Do you want to use the default name?",
+    "CustomKeyboardTempleteTitle":"Template",
+    "CustomKeyboardKanaTitle":"Kana",
+    "CustomKeyboardAlphabetCapitalTitle":"ABC",
+    "CustomKeyboardAlphabetTitle":"abc",
+    "CustomKeyboardNumberTitle":"123",
+    "BLEDeviceNameTitle":"BLE device name",
+    "RegisterNameTitle":"Remote controller name",
+    "ShopNameTitle":"Dealer",
+    "ShopTelTitle":"Dealer Tel",
+    "ServiceShopNameTitle":"Maintenance agcy",
+    "ServiceShopTelTitle":"Maintenance agcy Tel",
+    "CommonCancel":"Cancel",
+    "ModelNumberTitle":"Model name",
+    "SerialNumberTitle":"Serial No."
+}

@@ -1,0 +1,22 @@
+{
+    "CustomKeyboardDelete":"削除",
+    "CustomKeyboardDeleteAll":"全削除",
+    "CommonInfo":"お知らせ",
+    "CustomKeyboardNomoreCharacterAdded":"制限文字数を超えています",
+    "CommonConfirm":"確認",
+    "CustomKeyboardUseDefaultBleDeviceName":"デフォルトの名称を使用します<br>よろしいですか？",
+    "CustomKeyboardTempleteTitle":"固定文字",
+    "CustomKeyboardKanaTitle":"カナ",
+    "CustomKeyboardAlphabetCapitalTitle":"ABC",
+    "CustomKeyboardAlphabetTitle":"abc",
+    "CustomKeyboardNumberTitle":"123",
+    "BLEDeviceNameTitle":"BLEデバイス名称登録",
+    "RegisterNameTitle":"リモコン名称登録",
+    "ShopNameTitle":"販売店名",
+    "ShopTelTitle":"販売店 TEL",
+    "ServiceShopNameTitle":"サービス店名",
+    "ServiceShopTelTitle":"サービス店 TEL",
+    "CommonCancel":"キャンセル",
+    "ModelNumberTitle":"形名",
+    "SerialNumberTitle":"製造No"
+}
