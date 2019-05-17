@@ -25,8 +25,8 @@ export class KeyboardCommon {
 */
   export class KeyboardCommonStrings {
     //TODO:deletestrings以外は要素追加 二次元配列にする
-    readonly keyboardstrings = ['ｶﾅ','ABC','123','固定文字'];
-    readonly deletestrings = ['一文字削除', '全削除'];
+    readonly keyboardstrings = ['CustomKeyboardKanaTitle','CustomKeyboardAlphabetCapitalTitle','CustomKeyboardNumberTitle','CustomKeyboardTempleteTitle'];
+    readonly deletestrings = ['CustomKeyboardDelete', 'CustomKeyboardDeleteAll'];
     readonly kanaLists = ['ｱ','ｲ','ｳ','ｴ','ｵ'];     //ｶﾅ文字列
     readonly alphabetLists = ['A','B','C','D','E']; //英字文字列
     readonly numberLists = ['1','2','3','4','5'];  //数字文字列

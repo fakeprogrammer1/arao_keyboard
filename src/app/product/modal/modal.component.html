@@ -1,10 +1,10 @@
 <div class="overlay">
   <div class="modal">
     <div class="header">
-      <label id="header_label">お知らせ</label>
+      <label id="header_label">{{ "CommonInfo" | translate}}</label>
     </div>
     <div class="contents">
-      制限文字数を超えています
+      {{ "CustomKeyboardNomoreCharacterAdded" | translate}}
     </div>
     <div class="footer">
       <input id="close_button" type="button" value="OK" (click)="onClick()">
