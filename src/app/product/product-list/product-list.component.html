@@ -1,6 +1,12 @@
 <p>
     product-list works!
 </p>
-<div class="button" [routerLink]="['/products', 'keyboard']" (click)="goKeyboard()">
-    Keyboardへ
+<div class="button" [routerLink]="['/products', 'keyboard']" (click)="goKeyboard(0)">
+    初期値なし
+</div>
+<div class="button" [routerLink]="['/products', 'keyboard']" (click)="goKeyboard(1)">
+    初期値あり
+</div>
+<div class="button" [routerLink]="['/products', 'keyboard']" (click)="goKeyboard(2)">
+    test2
 </div>

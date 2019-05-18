@@ -6,15 +6,14 @@
         inputstring = "会議室南1234"
 */
 export class KeyboardCommon {
-    keyboardpattern: number;    //キーボードパターン　0:ｶﾅABC123固定文字 1:ABCabc123
+//    keyboardpattern: number;    //キーボードパターン　0:ｶﾅABC123固定文字 1:ABCabc123
     inputsizes: number[];       //文字数リスト
     inputstring: string;        //表示文字列
     errorcode: number;          //errorcode ０:正常
     readonly MAX_SIZE = 16;
   
     constructor() {
-        this.keyboardpattern = 0;
-        this.inputsizes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        this.inputsizes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         this.inputstring = '';
         this.errorcode = 0;
     }
