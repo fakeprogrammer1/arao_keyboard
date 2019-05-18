@@ -7,9 +7,24 @@ import { KeyboardCommon } from '../../shared/models/product-Keyboard-Common';
 })
 export class ProductKeyboardCommonService {
   private keyboardCommon = new KeyboardCommon();
+  keyboardType: number;
   private index: number;
   private tmplengthsize: number; 
   private tmpcodenum: number;
+
+  readonly keyboardTypeInfoList = [
+    // keyboardTitle:キーボードに表示するタイトル、maxLength:入力文字列最大長
+    //   TODO：下記keyboardStringsもここに含めたいけど一旦保留。現状、HTMLがベタ書きなんでそれ直してから
+    {keyboardTitle:'RegisterNameTitle', maxLength: 16},
+    {keyboardTitle:'BLEDeviceNameTitle',maxLength: 20},
+    {keyboardTitle:'未定義',maxLength: 30},
+    {keyboardTitle:'未定義',maxLength: 30},
+    {keyboardTitle:'未定義',maxLength: 30},
+    {keyboardTitle:'未定義',maxLength: 30},
+    {keyboardTitle:'未定義',maxLength: 30},
+    {keyboardTitle:'未定義',maxLength: 30}
+  ];
+
   constructor() { 
   }
 
@@ -22,7 +37,7 @@ export class ProductKeyboardCommonService {
   dataImport(keyboardCommon: KeyboardCommon): number{
     //入力情報の判定処理
     for (this.index = 0; keyboardCommon.inputsizes[this.index] != 0; this.index++);
-    if((this.index >= this.keyboardCommon.MAX_SIZE) || (this.LengthCheck(keyboardCommon.inputstring)  >= this.keyboardCommon.MAX_SIZE )){
+    if((this.index >= this.keyboardTypeInfoList[this.keyboardType].maxLength) || (this.LengthCheck(keyboardCommon.inputstring)  >= this.keyboardTypeInfoList[this.keyboardType].maxLength )){
       return(-1)
     }
 
@@ -41,7 +56,7 @@ export class ProductKeyboardCommonService {
     return (this.keyboardCommon);
   }
 
-    /**
+  /**
   * @brief MELCOキーボードに表示する情報の初期化
   * @param -
   * @return -
@@ -55,19 +70,29 @@ export class ProductKeyboardCommonService {
   }
 
   /**
-  * @brief MELCOキーボードに表示する情報に変更が入った通知
-  * @param -
-  * @return keyboardCommon(out) キーボード表示情報
-  * @detail 
+  * @brief MELCOキーボードの種別を設定
+  * @param keyboardType(in) キーボード種別
+  * @return -
+  * @detail 0:リモコン名称登録
+  *         1:BLEデバイス名称登録
   */
+  setKeyboardType(keyboardType: number): void{
+    this.keyboardType = keyboardType;
+  }
+
+  // MELCOキーボードに表示する情報に変更が入った通知
   datachanged(): Observable<KeyboardCommon>{
     return of(this.keyboardCommon);
   }
 
-  // 最大値を超えていないかチェックする関数
+  // MELCOキーボード種別に変更が入った通知
+  keyboardTypechanged(): Observable<number>{
+    return of(this.keyboardType);
+  }
+
+  // 文字列をByteに変換
   private LengthCheck(tmpstr: string): number{
     this.tmplengthsize = 0;
-    // 文字列をByteに変換し16Byte以内ならTrueを返す。
     for (this.index = 0; this.index < tmpstr.length; this.index++){
       this.tmpcodenum = tmpstr.charCodeAt(this.index);
       if ((this.tmpcodenum >= 0x0 && this.tmpcodenum < 0x81) || (this.tmpcodenum === 0xf8f0) || (this.tmpcodenum >= 0xff61 && this.tmpcodenum < 0xffa0) || (this.tmpcodenum >= 0xf8f1 && this.tmpcodenum < 0xf8f4))
@@ -75,8 +100,6 @@ export class ProductKeyboardCommonService {
       else 
         this.tmplengthsize += 2;
       }
-    console.log ('size = ' + this.tmplengthsize);
-    console.log ('MAX = ' + this.keyboardCommon.MAX_SIZE);
     return (this.tmplengthsize);
   }
   

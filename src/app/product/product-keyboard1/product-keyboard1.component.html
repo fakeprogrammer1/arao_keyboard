@@ -1,55 +1,96 @@
 <body>
     <ng-container *ngComponentOutlet="modal"></ng-container>
     <div id="araoHeader">
-        <span class="araotitle">{{ "BLEDeviceNameTitle" | translate }}</span>
+        <span class="araotitle">{{ productKeyboardCommonService.keyboardTypeInfoList[productKeyboardCommonService.keyboardType].keyboardTitle | translate }}</span>
 
         <div class="footer">
             <div class="araotextbox">{{ keyboardCommon.inputstring }}</div>
         </div>
         <div class="footer">
-            <div class="araobutton gray" (click)="delCharactor()">{{ keyboardCommonStrings.deletestrings[0] | translate }}</div>
-            <span class="araobutton gray" (click)="delAllString()">{{ keyboardCommonStrings.deletestrings[1] | translate }}</span>
+            <div class="araobutton gray" (click)="delCharactor()" translate> CustomKeyboardDelete </div>
+            <span class="araobutton gray" (click)="delAllString()" translate> CustomKeyboardDeleteAll </span>
         </div>
-        <div [ngSwitch]="currentKeyboard">
+
+        <div [ngSwitch]="productKeyboardCommonService.keyboardType">
+            <!-- リモコン名称入力 -->
             <div *ngSwitchCase="0">
-                <div class="footer">
-                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                <div [ngSwitch]="currentKeyboard">
+                    <div *ngSwitchCase="0">
+                        <div class="footer">
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(4)">{{ keyboardCommonStrings.keyboardstrings[4] | translate }}</span>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="1">
+                        <div class="footer">
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(4)">{{ keyboardCommonStrings.keyboardstrings[4] | translate }}</span>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="3">
+                        <div class="footer">
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(4)">{{ keyboardCommonStrings.keyboardstrings[4] | translate }}</span>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="4">
+                        <div class="footer">
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[4] | translate }}</span>
+                        </div>
+                    </div>
+                    <div *ngSwitchDefault>
+                        <div class="footer">
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- BLEデバイス名称入力 -->
             <div *ngSwitchCase="1">
-                <div class="footer">
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
-                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
-                </div>
-            </div>
-            <div *ngSwitchCase="2">
-                <div class="footer">
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
-                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
-                </div>
-            </div>
-            <div *ngSwitchCase="3">
-                <div class="footer">
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(0)">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
-                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                <div [ngSwitch]="currentKeyboard">
+                    <div *ngSwitchCase="1">
+                        <div class="footer">
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="2">
+                        <div class="footer">
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="3">
+                        <div class="footer">
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                        </div>
+                    </div>
+                    <div *ngSwitchDefault>
+                        <div class="footer">
+                            <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
+                            <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div *ngSwitchDefault>
-                <div class="footer">
-                    <span class="araotub active">{{ keyboardCommonStrings.keyboardstrings[0] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(1)">{{ keyboardCommonStrings.keyboardstrings[1] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(2)">{{ keyboardCommonStrings.keyboardstrings[2] | translate }}</span>
-                    <span class="araotub nonactive" (click)="setCurrentKeyboard(3)">{{ keyboardCommonStrings.keyboardstrings[3] | translate }}</span>
-                </div>
             </div>
         </div>
     </div>
@@ -65,19 +106,26 @@
             </div>
             <div *ngSwitchCase="1">
                 <div class="footer">
-                    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.alphabetLists[j])" *ngFor="let i of keyboardCommonStrings.alphabetLists; index as j">
-                        {{ keyboardCommonStrings.alphabetLists[j] }}
+                    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.alphabetCapitalLists[j])" *ngFor="let i of keyboardCommonStrings.alphabetCapitalLists; index as j">
+                        {{ keyboardCommonStrings.alphabetCapitalLists[j] }}
                     </span>
                 </div>
             </div>
             <div *ngSwitchCase="2">
+                <div class="footer">
+                    <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.alphabetLists[j])" *ngFor="let i of keyboardCommonStrings.alphabetLists; index as j">
+                            {{ keyboardCommonStrings.alphabetLists[j] }}
+                        </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="3">
                 <div class="footer">
                     <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.numberLists[j])" *ngFor="let i of keyboardCommonStrings.numberLists; index as j">
                         {{ keyboardCommonStrings.numberLists[j] }}
                    </span>
                 </div>
             </div>
-            <div *ngSwitchCase="3">
+            <div *ngSwitchCase="4">
                 <div class="footer">
                     <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.charsLists[j])" *ngFor="let i of keyboardCommonStrings.charsLists; index as j">
                         {{ keyboardCommonStrings.charsLists[j] }}
@@ -104,8 +152,8 @@
         </div>
 
         <div class="footer">
-            <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.alphabetLists[j])" *ngFor="let i of keyboardCommonStrings.alphabetLists; index as j">
-        {{ keyboardCommonStrings.alphabetLists[j] }}
+            <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.alphabetCapitalLists[j])" *ngFor="let i of keyboardCommonStrings.alphabetCapitalLists; index as j">
+        {{ keyboardCommonStrings.alphabetCapitalLists[j] }}
     </span>
         </div>
 
@@ -126,7 +174,7 @@
 
         </div>
         <div class="button">
-            <div class="button" routerLink="/products">{{ "CommonCancel" | translate }}</div>
+            <div class="button" routerLink="/products" translate> CommonCancel </div>
 
         </div>
     </div>

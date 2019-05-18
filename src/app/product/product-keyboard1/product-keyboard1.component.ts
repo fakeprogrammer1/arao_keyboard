@@ -20,11 +20,10 @@ export class ProductKeyboard1Component implements OnInit {
   private tmpstr:string;
   private tmplengthsize: number; 
   private tmpcodenum: number;
-  currentKeyboard: number;
+  currentKeyboard: number;  // 0:ｶﾅ,1:ABC,2:abc,3:123,4:固定文字
   modal = null;
   subscription: Subscription;
-  
-  
+
   constructor(
     private productKeyboardCommonService: ProductKeyboardCommonService,
     private modalService: ModalService)
@@ -45,6 +44,23 @@ export class ProductKeyboard1Component implements OnInit {
     // MELCOキーボードに変更が入ったときの処理
     this.productKeyboardCommonService.datachanged().subscribe((keyboardCommon: KeyboardCommon) => {
         this.keyboardCommon = keyboardCommon;
+      }
+    );
+    // MELCOキーボード種別に変更が入ったときの処理
+    this.productKeyboardCommonService.keyboardTypechanged().subscribe((keyboardType: number) => {
+        // TODO：ここに処理追加しHTMLを整理
+        switch (keyboardType) {
+          // リモコン名称入力
+          case 0:
+            this.currentKeyboard = 0; // ｶﾅ
+            break;
+          // BLEデバイス名称入力
+          case 1:
+            this.currentKeyboard = 1; // ABC      
+            break;        
+          default:
+            break;
+        }
       }
     );
   }
@@ -68,7 +84,7 @@ export class ProductKeyboard1Component implements OnInit {
     // 最大文字数超えていないか判定
     this.tmpstr = this.keyboardCommon.inputstring + addstring;
     console.log(this.tmpstr);
-    if (this.LengthCheck() <= this.keyboardCommon.MAX_SIZE) {  //最大文字列を超えている場合は現在の文字列をエラーを応答
+    if (this.LengthCheck() <= this.productKeyboardCommonService.keyboardTypeInfoList[this.productKeyboardCommonService.keyboardType].maxLength) {  //最大文字列を超えている場合は現在の文字列をエラーを応答
       // 文字列に追加
       this.keyboardCommon.inputstring = this.tmpstr;
       // 文字数リストを更新
@@ -114,10 +130,9 @@ export class ProductKeyboard1Component implements OnInit {
     this.currentKeyboard = currentKeyboard;
   }
 
-  // 最大値を超えていないかチェックする関数
+  // 文字列をByteに変換
   private LengthCheck(): number{
     this.tmplengthsize = 0;
-    // 文字列をByteに変換し16Byte以内ならTrueを返す。
     for (this.index = 0; this.index < this.tmpstr.length; this.index++){
       this.tmpcodenum = this.tmpstr.charCodeAt(this.index);
       if ((this.tmpcodenum >= 0x0 && this.tmpcodenum < 0x81) || (this.tmpcodenum === 0xf8f0) || (this.tmpcodenum >= 0xff61 && this.tmpcodenum < 0xffa0) || (this.tmpcodenum >= 0xf8f1 && this.tmpcodenum < 0xf8f4))
@@ -125,8 +140,6 @@ export class ProductKeyboard1Component implements OnInit {
       else 
         this.tmplengthsize += 2;
     }
-    console.log ('size = ' + this.tmplengthsize);
-    console.log ('MAX = ' + this.keyboardCommon.MAX_SIZE);
     return (this.tmplengthsize);
   }
 
