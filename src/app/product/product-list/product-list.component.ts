@@ -11,6 +11,7 @@ import { ProductKeyboardCommonService } from '../../shared/services/product-keyb
 export class ProductListComponent{
   keyboardCommonStrings:KeyboardCommonStrings;
   sd = saveData.getInstance();
+  //s; //テスト用変数
   constructor(private productKeyboardCommonService: ProductKeyboardCommonService) {
   }
 
@@ -21,6 +22,11 @@ export class ProductListComponent{
     // キーボードタイプを設定
     this.productKeyboardCommonService.setKeyboardType(num);
     this.productKeyboardCommonService.dataImport(this.sd.keyboardCommon); 
+    
+    // 以下BLE通信テスト用コード
+    //this.s = this.sd.keyboardCommon.convertBLEArray("A0");
+    //alert(this.s);
+    
   }
 
 }
