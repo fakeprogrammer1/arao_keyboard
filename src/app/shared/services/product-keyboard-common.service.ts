@@ -6,7 +6,7 @@ import { KeyboardCommon } from '../../shared/models/product-Keyboard-Common';
   providedIn: 'root'
 })
 export class ProductKeyboardCommonService {
-  private keyboardCommon = new KeyboardCommon();
+  private keyboardCommon;
   keyboardType: number;
   private index: number;
   private tmplengthsize: number; 
@@ -15,14 +15,14 @@ export class ProductKeyboardCommonService {
   readonly keyboardTypeInfoList = [
     // keyboardTitle:キーボードに表示するタイトル、maxLength:入力文字列最大長
     //   TODO：下記keyboardStringsもここに含めたいけど一旦保留。現状、HTMLがベタ書きなんでそれ直してから
-    {keyboardTitle:'RegisterNameTitle', maxLength: 16},
-    {keyboardTitle:'BLEDeviceNameTitle',maxLength: 20},
-    {keyboardTitle:'未定義',maxLength: 30},
-    {keyboardTitle:'未定義',maxLength: 30},
-    {keyboardTitle:'未定義',maxLength: 30},
-    {keyboardTitle:'未定義',maxLength: 30},
-    {keyboardTitle:'未定義',maxLength: 30},
-    {keyboardTitle:'未定義',maxLength: 30}
+    {keyboardTitle:'ShopNameTitle', maxLength: 10},
+    {keyboardTitle:'ServiceShopNameTitle',maxLength: 10},
+    {keyboardTitle:'ServiceShopTelTitle',maxLength: 13},
+    {keyboardTitle:'ShopTelTitle',maxLength: 13},
+    {keyboardTitle:'SerialNumberTitle',maxLength: 15},
+    {keyboardTitle:'ModelNumberTitle',maxLength: 30}, // TODO マルチ：30,スリム：25
+    {keyboardTitle:'RegisterNameTitle',maxLength: 16},
+    {keyboardTitle:'BLEDeviceNameTitle',maxLength: 20}
   ];
 
   constructor() { 
@@ -38,22 +38,13 @@ export class ProductKeyboardCommonService {
     //入力情報の判定処理
     for (this.index = 0; keyboardCommon.inputsizes[this.index] != 0; this.index++);
     if((this.index >= this.keyboardTypeInfoList[this.keyboardType].maxLength) || (this.LengthCheck(keyboardCommon.inputstring)  >= this.keyboardTypeInfoList[this.keyboardType].maxLength )){
-      return(-1)
+      return(-1);
     }
 
     this.keyboardCommon = keyboardCommon;
+    this.keyboardCommon.inputstring = this.keyboardCommon.getInputString(this.keyboardType);
+    this.keyboardCommon.inputsizes = this.keyboardCommon.getInputSize(this.keyboardType);
     return (0);
-  }
-
-  /**
-  * @brief MELCOキーボードに表示する情報のExport
-  * @param -
-  * @return keyboardCommon(out) キーボード表示情報
-  * @detail 
-  */
-  dataExport(): KeyboardCommon{
-    this.keyboardCommon.errorcode = 0;
-    return (this.keyboardCommon);
   }
 
   /**
@@ -63,9 +54,6 @@ export class ProductKeyboardCommonService {
   * @detail 
   */
   dataInit(): KeyboardCommon{
-    this.keyboardCommon.inputsizes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    this.keyboardCommon.inputstring = '';
-    this.keyboardCommon.errorcode = 0;
     return (this.keyboardCommon);
   }
 

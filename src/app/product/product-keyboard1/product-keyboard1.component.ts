@@ -20,10 +20,10 @@ export class ProductKeyboard1Component implements OnInit {
   private tmpstr:string;
   private tmplengthsize: number; 
   private tmpcodenum: number;
-  currentKeyboard: number;  // 0:ｶﾅ,1:ABC,2:abc,3:123,4:固定文字
+  currentKeyboard: number;
   modal = null;
   subscription: Subscription;
-
+  
   constructor(
     private productKeyboardCommonService: ProductKeyboardCommonService,
     private modalService: ModalService)
@@ -31,42 +31,16 @@ export class ProductKeyboard1Component implements OnInit {
    }
 
   ngOnInit() {
-    this.keyboardCommon = new KeyboardCommon();
     this.keyboardCommonStrings = new KeyboardCommonStrings();
     //this.matDialogModule = new MatDialogModule();
     this.currentKeyboard = 0;
+    this.keyboardCommon = this.productKeyboardCommonService.dataInit();
     // モーダルダイアログを閉じる際のイベント処理
     this.subscription = this.modalService.closeEventObservable.subscribe(
       () => {
         this.modal = null;
       }
     );
-    // MELCOキーボードに変更が入ったときの処理
-    this.productKeyboardCommonService.datachanged().subscribe((keyboardCommon: KeyboardCommon) => {
-        this.keyboardCommon = keyboardCommon;
-      }
-    );
-    // MELCOキーボード種別に変更が入ったときの処理
-    this.productKeyboardCommonService.keyboardTypechanged().subscribe((keyboardType: number) => {
-        // TODO：ここに処理追加しHTMLを整理
-        switch (keyboardType) {
-          // リモコン名称入力
-          case 0:
-            this.currentKeyboard = 0; // ｶﾅ
-            break;
-          // BLEデバイス名称入力
-          case 1:
-            this.currentKeyboard = 1; // ABC      
-            break;        
-          default:
-            break;
-        }
-      }
-    );
-  }
-
-  ngDoCheck(){
-    this.keyboardCommon = this.productKeyboardCommonService.dataExport();
   }
   
   ngOnDestroy() {
@@ -121,8 +95,17 @@ export class ProductKeyboard1Component implements OnInit {
   */
   delAllString():void{
     // 配列を初期化
-    this.keyboardCommon.inputsizes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];;
+    this.keyboardCommon.inputsizes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.keyboardCommon.inputstring = ''; 
+  }
+  
+  save():void{
+    this.keyboardCommon.inputstring = this.keyboardCommon.deleteTrailSpaces();
+    if(this.productKeyboardCommonService.keyboardType == 7 && this.keyboardCommon.inputstring.length == 0){
+        //TODO デフォルトの名前を設定するか確認するダイアログ
+        alert("TITLE：確認、MSG：デフォルトの名称を使用します\nよろしいですか？キャンセルOK");
+    }
+    this.keyboardCommon.saveInputData(this.productKeyboardCommonService.keyboardType);
   }
   
   // キーボード切り替え
