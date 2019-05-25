@@ -94,7 +94,7 @@ export class ProductKeyboard1Component implements OnInit {
   
   save():void{
     this.keyboardCommon.inputstring = this.keyboardCommon.deleteTrailSpaces();
-    if(this.productKeyboardCommonService.keyboardType == 7 && this.keyboardCommon.inputstring.length == 0){
+    if(this.productKeyboardCommonService.keyboardType == 8 && this.keyboardCommon.inputstring.length == 0){
         //TODO デフォルトの名前を設定するか確認するダイアログ
         alert("TITLE：確認、MSG：デフォルトの名称を使用します\nよろしいですか？キャンセルOK");
     }

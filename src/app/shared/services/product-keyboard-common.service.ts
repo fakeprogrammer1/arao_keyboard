@@ -20,7 +20,8 @@ export class ProductKeyboardCommonService {
     {keyboardTitle:'ServiceShopTelTitle',maxLength: 13},
     {keyboardTitle:'ShopTelTitle',maxLength: 13},
     {keyboardTitle:'SerialNumberTitle',maxLength: 15},
-    {keyboardTitle:'ModelNumberTitle',maxLength: 30}, // TODO マルチ：30,スリム：25
+    {keyboardTitle:'ModelNumberTitle',maxLength: 30},
+    {keyboardTitle:'ModelNumberTitle',maxLength: 25},
     {keyboardTitle:'RegisterNameTitle',maxLength: 16},
     {keyboardTitle:'BLEDeviceNameTitle',maxLength: 20}
   ];

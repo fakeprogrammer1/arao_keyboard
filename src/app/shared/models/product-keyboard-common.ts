@@ -8,7 +8,7 @@
 export class KeyboardCommon {
     inputstring: string;        //表示文字列
     errorcode: number;          //errorcode ０:正常
-    private saveInputString: any[8] = ['','','','','','','',''];
+    private saveInputString: any[9] = ['','','','','','','','',''];
     bleArray =[' ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
                '0','1','2','3','4','5','6','7','8','9','-','/','(',')','.',',','゛','゜',
                'ｱ','ｲ','ｳ','ｴ','ｵ','ｶ','ｷ','ｸ','ｹ','ｺ','ｻ','ｼ','ｽ','ｾ','ｿ','ﾀ','ﾁ','ﾂ','ﾃ','ﾄ','ﾅ','ﾆ','ﾇ','ﾈ','ﾉ','ﾊ','ﾋ','ﾌ','ﾍ','ﾎ','ﾏ','ﾐ','ﾑ','ﾒ','ﾓ','ﾔ','ﾕ','ﾖ','ﾗ','ﾘ','ﾙ','ﾚ','ﾛ','ﾜ','ｦ','ﾝ',
@@ -128,7 +128,8 @@ export class KeyboardCommon {
                          [this.numberLists2],// 販売店TEL
                          [this.numberLists2],// サービス店TEL
                          [this.alphabetCapitalLists2,this.numberLists1],// 製造No.
-                         [this.alphabetCapitalLists2,this.numberLists1],// 型名情報
+                         [this.alphabetCapitalLists2,this.numberLists1],// 型名情報(マルチ)
+                         [this.alphabetCapitalLists2,this.numberLists1],// 型名情報(スリム)
                          [this.kanaLists,this.alphabetCapitalLists1,this.numberLists1,this.charsLists], // リモコン名称設定
                          [this.alphabetCapitalLists3,this.alphabetLists,this.numberLists1]]; //デバイス名称設定
                          
@@ -138,7 +139,8 @@ export class KeyboardCommon {
                            [/*何もなし*/], // 販売店TEL
                            [/*何もなし*/], // サービス店TEL
                            [this.keyboardstrings[1],this.keyboardstrings[3]], // 製造No.
-                           [this.keyboardstrings[1],this.keyboardstrings[3]], // 型名情報
+                           [this.keyboardstrings[1],this.keyboardstrings[3]], // 型名情報(マルチ)
+                           [this.keyboardstrings[1],this.keyboardstrings[3]], // 型名情報(スリム)
                            [this.keyboardstrings[0],this.keyboardstrings[1],this.keyboardstrings[3],this.keyboardstrings[4]], // リモコン名称設定
                            [this.keyboardstrings[1],this.keyboardstrings[2],this.keyboardstrings[3]]]; //デバイス名称設定
                            
