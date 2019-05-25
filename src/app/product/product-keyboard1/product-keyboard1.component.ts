@@ -61,9 +61,6 @@ export class ProductKeyboard1Component implements OnInit {
     if (this.LengthCheck() <= this.productKeyboardCommonService.keyboardTypeInfoList[this.productKeyboardCommonService.keyboardType].maxLength) {  //最大文字列を超えている場合は現在の文字列をエラーを応答
       // 文字列に追加
       this.keyboardCommon.inputstring = this.tmpstr;
-      // 文字数リストを更新
-      for (this.index = 0; this.keyboardCommon.inputsizes[this.index] != 0; this.index++);
-      this.keyboardCommon.inputsizes[this.index] = addstring.length; 
     }
     else{
       this.modal = ModalComponent;
@@ -78,13 +75,10 @@ export class ProductKeyboard1Component implements OnInit {
   */
   delCharactor(): void{
     // 削除する文字数を取得
-    for (this.index = 0; this.keyboardCommon.inputsizes[this.index] != 0 && this.index < this.keyboardCommon.inputsizes.length; this.index++);
+    var delNum = this.keyboardCommon.countLastCharChunk(this.keyboardCommon.inputstring.slice(-3));
 
     // 文字列から指定文字数分を削除
-    this.keyboardCommon.inputstring = this.keyboardCommon.inputstring.slice(0, -this.keyboardCommon.inputsizes[this.index - 1]);
-
-    // 文字数リストを更新
-    this.keyboardCommon.inputsizes[this.index-1] = 0;
+    this.keyboardCommon.inputstring = this.keyboardCommon.inputstring.slice(0, -delNum);
   }
 
   /**
@@ -95,7 +89,6 @@ export class ProductKeyboard1Component implements OnInit {
   */
   delAllString():void{
     // 配列を初期化
-    this.keyboardCommon.inputsizes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.keyboardCommon.inputstring = ''; 
   }
   

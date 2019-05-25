@@ -35,15 +35,14 @@ export class ProductKeyboardCommonService {
   * @detail 共通部品ではStorageへのデータ保存を行わないため、保存データを読み込む場合は本関数を使用
   */
   dataImport(keyboardCommon: KeyboardCommon): number{
+    
     //入力情報の判定処理
-    for (this.index = 0; keyboardCommon.inputsizes[this.index] != 0; this.index++);
-    if((this.index >= this.keyboardTypeInfoList[this.keyboardType].maxLength) || (this.LengthCheck(keyboardCommon.inputstring)  >= this.keyboardTypeInfoList[this.keyboardType].maxLength )){
+    if((keyboardCommon.inputstring.length >= this.keyboardTypeInfoList[this.keyboardType].maxLength) || (this.LengthCheck(keyboardCommon.inputstring)  >= this.keyboardTypeInfoList[this.keyboardType].maxLength )){
       return(-1);
     }
-
+    
     this.keyboardCommon = keyboardCommon;
     this.keyboardCommon.inputstring = this.keyboardCommon.getInputString(this.keyboardType);
-    this.keyboardCommon.inputsizes = this.keyboardCommon.getInputSize(this.keyboardType);
     return (0);
   }
 

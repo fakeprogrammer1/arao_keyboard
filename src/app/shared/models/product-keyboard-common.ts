@@ -6,11 +6,9 @@
         inputstring = "会議室南1234"
 */
 export class KeyboardCommon {
-    inputsizes: number[];       //文字数リスト
     inputstring: string;        //表示文字列
     errorcode: number;          //errorcode ０:正常
     private saveInputString: any[8] = ['','','','','','','',''];
-    private saveInputSize: any[8][] =[];
     bleArray =[' ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
                '0','1','2','3','4','5','6','7','8','9','-','/','(',')','.',',','゛','゜',
                'ｱ','ｲ','ｳ','ｴ','ｵ','ｶ','ｷ','ｸ','ｹ','ｺ','ｻ','ｼ','ｽ','ｾ','ｿ','ﾀ','ﾁ','ﾂ','ﾃ','ﾄ','ﾅ','ﾆ','ﾇ','ﾈ','ﾉ','ﾊ','ﾋ','ﾌ','ﾍ','ﾎ','ﾏ','ﾐ','ﾑ','ﾒ','ﾓ','ﾔ','ﾕ','ﾖ','ﾗ','ﾘ','ﾙ','ﾚ','ﾛ','ﾜ','ｦ','ﾝ',
@@ -21,13 +19,8 @@ export class KeyboardCommon {
                ];
                
     constructor() {
-        this.inputsizes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         this.inputstring = '';
         this.errorcode = 0;
-        
-        for(var i=0; i<8; i++){
-            this.saveInputSize[i] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        }
     }
     
     // 末尾の空白を削除
@@ -43,32 +36,62 @@ export class KeyboardCommon {
     //保存
     saveInputData(num){
         this.saveInputString[num] = this.inputstring;
-        this.saveInputSize[num] = this.inputsizes;
     }
     
     // 取得
     getInputString(num){
         return this.saveInputString[num];
     }
-    getInputSize(num){
-        return this.saveInputSize[num];
-    }
     //TODO BLE通信変換
     convertBLEArray(str: string){
         var convertData = [];
-        
-        for(var i=0; i<str.length; i++){
-            var char = this.bleArray.indexOf(str.charAt(i));
+
+        for(var i=0; i<str.length;){
+            var charNum = this.countNextCharChunk(str.slice(i));
+            var char = this.bleArray.indexOf(str.slice(i,i+charNum));
             if(char == -1){
                 // キーボードで入力される文字以外が入っている
                 return -1;
             }else{
                 convertData.push(char);
+                i+=charNum;
             }
         }
         
         return convertData;
     }
+
+     countNextCharChunk(str: string){
+         var str3 = str.slice(0,3)
+         var list3 = ['会議室','事務所','打合せ'];
+         if(list3.indexOf(str3) >= 0){
+             return 3;
+         }
+         
+         var str2 = str.slice(0,2)
+         var list2 = ['通路','部屋','廊下','空調','換気'];
+         if(list2.indexOf(str2) >= 0){
+             return 2;
+         }
+         
+         return 1;
+     }
+     
+     countLastCharChunk(str: string){
+         var str3 = str.slice(-3)
+         var list3 = ['会議室','事務所','打合せ'];
+         if(list3.indexOf(str3) >= 0){
+             return 3;
+         }
+         
+         var str2 = str.slice(-2)
+         var list2 = ['通路','部屋','廊下','空調','換気'];
+         if(list2.indexOf(str2) >= 0){
+             return 2;
+         }
+         
+         return 1;
+     }
 
 }
 

@@ -24,7 +24,7 @@ export class ProductListComponent{
     this.productKeyboardCommonService.dataImport(this.sd.keyboardCommon); 
     
     // 以下BLE通信テスト用コード
-    //this.s = this.sd.keyboardCommon.convertBLEArray("A0");
+    //this.s = this.sd.keyboardCommon.convertBLEArray("A0会議室d空調");
     //alert(this.s);
     
   }
