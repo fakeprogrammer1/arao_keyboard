@@ -6,16 +6,16 @@ import { Subject } from 'rxjs';
 })
 export class ModalService {
 
-  // ƒCƒxƒ“ƒg’Ê’m‚ğs‚¤‚½‚ß‚ÌƒIƒuƒWƒFƒNƒg
+  // ã‚¤ãƒ™ãƒ³ãƒˆé€šçŸ¥ã‚’è¡Œã†ãŸã‚ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
   private closeEventSubject = new Subject<string>();
 
-  // ƒCƒxƒ“ƒg’Ê’m‚ğó‚¯æ‚é‚½‚ß‚ÌƒIƒuƒWƒFƒNƒg
+  // ã‚¤ãƒ™ãƒ³ãƒˆé€šçŸ¥ã‚’å—ã‘å–ã‚‹ãŸã‚ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
   public closeEventObservable = this.closeEventSubject.asObservable();
 
   constructor() { }
 
   public requestCloseModal() {
-    // ƒ‚[ƒ_ƒ‹ƒ_ƒCƒAƒƒO‚ğ•Â‚¶‚é
+    // ãƒ¢ãƒ¼ãƒ€ãƒ«ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‰ã˜ã‚‹
     this.closeEventSubject.next();
   }
 }

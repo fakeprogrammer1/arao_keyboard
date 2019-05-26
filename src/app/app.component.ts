@@ -8,19 +8,19 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'arao-keyboard';
-  
+
   constructor(private translate: TranslateService){
-    // ƒuƒ‰ƒEƒU‚ÌŒ¾Œêİ’èæ“¾
+    // ãƒ–ãƒ©ã‚¦ã‚¶ã®è¨€èªè¨­å®šå–å¾—
     const browserLanguage: string = (() => {
       if (navigator.languages.length > 0) {
         return navigator.languages[0];
       }
-      
-      //ƒfƒtƒHƒ‹ƒg
+
+      //ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
       return "en-US";
     })();
-   
-   // Œ¾Œêİ’è
+
+   // è¨€èªè¨­å®š
    this.translate.use(browserLanguage);
   }
 }
