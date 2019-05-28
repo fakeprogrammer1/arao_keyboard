@@ -49,8 +49,8 @@ export class ProductKeyboard1Component implements OnInit {
     /**
   * @brief MELCOキーボードに表示する文字列を*1文字*追加する *MELCOキーボード内での１文字
   * @param addstring(in) 追加する１文字
-  * @return keyboardCommon(out) キーボード表示情報
-  * @detail ErrorCode(-1) :文字数オーバー
+  * @return -
+  * @detail 文字数オーバーの場合、モーダル画面表示
   */
   addCharactor(addstring: string): void{
     // 最大文字数超えていないか判定
@@ -80,7 +80,7 @@ export class ProductKeyboard1Component implements OnInit {
   }
 
   /**
-  * @brief MELCOキーボードに表示する文字列をすべて削除する *MELCOキーボード内での１文字
+  * @brief MELCOキーボードに表示する文字列をすべて削除する
   * @param -
   * @return keyboardCommon(out) キーボード表示情報
   * @detail 
@@ -89,22 +89,46 @@ export class ProductKeyboard1Component implements OnInit {
     // 配列を初期化
     this.keyboardCommon.inputstring = ''; 
   }
-  
+
+    /**
+  * @brief MELCOキーボードで入力した文字列を保存する
+  * @param -
+  * @return -
+  * @detail 文字数オーバー
+  */
   save():void{
     this.keyboardCommon.inputstring = this.keyboardCommon.deleteTrailSpaces();
     if(this.productKeyboardCommonService.keyboardType == 8 && this.keyboardCommon.inputstring.length == 0){
         //TODO デフォルトの名前を設定するか確認するダイアログ
-        alert("TITLE：確認、MSG：デフォルトの名称を使用します\nよろしいですか？キャンセルOK");
+        confirm("デフォルトの名称を使用します\nよろしいですか？");
     }
     this.keyboardCommon.saveInputData(this.productKeyboardCommonService.keyboardType);
   }
-  
-  // キーボード切り替え
+
+  /**
+  * @brief MELCOキーボードの種別を設定
+  * @param currentKeyboard(in) キーボード種別
+  * @return -
+   * @detail キーボードs種別は以下
+  *         1:サービス店
+  *         2:販売店
+  *         3:販売店TEL
+  *         4:製造No.
+  *         5:型名情報(マルチ)
+  *         6:型名情報(スリム)
+  *         7:リモコン名称設定
+  *         8:デバイス名称設定
+  */
   setCurrentKeyboard(currentKeyboard: number): void{
     this.currentKeyboard = currentKeyboard;
   }
 
-  // 文字列をByteに変換
+ /**
+  * @brief MELCOキーボード上での文字列の長さを計算する
+  * @param -
+  * @return -
+  * @detail 半角文字：1文字、全角文字：2文字で計算する
+  */
   private LengthCheck(): number{
     this.tmplengthsize = 0;
     for (this.index = 0; this.index < this.tmpstr.length; this.index++){
@@ -116,5 +140,4 @@ export class ProductKeyboard1Component implements OnInit {
     }
     return (this.tmplengthsize);
   }
-
 }

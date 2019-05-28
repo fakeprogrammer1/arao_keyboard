@@ -14,7 +14,6 @@ export class ProductKeyboardCommonService {
 
   readonly keyboardTypeInfoList = [
     // keyboardTitle:キーボードに表示するタイトル、maxLength:入力文字列最大長
-    //   TODO：下記keyboardStringsもここに含めたいけど一旦保留。現状、HTMLがベタ書きなんでそれ直してから
     {keyboardTitle:'ShopNameTitle', maxLength: 10},
     {keyboardTitle:'ServiceShopNameTitle',maxLength: 10},
     {keyboardTitle:'ServiceShopTelTitle',maxLength: 13},
@@ -61,31 +60,55 @@ export class ProductKeyboardCommonService {
   * @brief MELCOキーボードの種別を設定
   * @param keyboardType(in) キーボード種別
   * @return -
-  * @detail 0:リモコン名称登録
-  *         1:BLEデバイス名称登録
+  * @detail キーボードs種別は以下
+  *         1:サービス店
+  *         2:販売店
+  *         3:販売店TEL
+  *         4:製造No.
+  *         5:型名情報(マルチ)
+  *         6:型名情報(スリム)
+  *         7:リモコン名称設定
+  *         8:デバイス名称設定
   */
   setKeyboardType(keyboardType: number): void{
     this.keyboardType = keyboardType;
   }
 
-  // MELCOキーボードに表示する情報に変更が入った通知
+   /**
+  * @brief MELCOキーボードに表示する情報に変更が入った通知
+  * @param -
+  * @return -
+  * @detail 
+  */
   datachanged(): Observable<KeyboardCommon>{
     return of(this.keyboardCommon);
   }
 
-  // MELCOキーボード種別に変更が入った通知
+  /**
+  * @brief MELCOキーボード種別に変更が入った通知
+  * @param -
+  * @return -
+  * @detail キーボード種別
+  */
   keyboardTypechanged(): Observable<number>{
     return of(this.keyboardType);
   }
 
-  // 文字列をByteに変換
+  /**
+  * @brief MELCOキーボード上での文字列の長さを計算する
+  * @param -
+  * @return -
+  * @detail 
+  */
   private LengthCheck(tmpstr: string): number{
     this.tmplengthsize = 0;
     for (this.index = 0; this.index < tmpstr.length; this.index++){
       this.tmpcodenum = tmpstr.charCodeAt(this.index);
       if ((this.tmpcodenum >= 0x0 && this.tmpcodenum < 0x81) || (this.tmpcodenum === 0xf8f0) || (this.tmpcodenum >= 0xff61 && this.tmpcodenum < 0xffa0) || (this.tmpcodenum >= 0xf8f1 && this.tmpcodenum < 0xf8f4))
+        // MELCOキーボードに表示される半角文字なら1文字
         this.tmplengthsize += 1;
       else 
+        // MELCOキーボードに表示されない文字なら2文字
         this.tmplengthsize += 2;
       }
     return (this.tmplengthsize);

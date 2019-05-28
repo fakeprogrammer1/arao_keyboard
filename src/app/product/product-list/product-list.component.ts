@@ -15,8 +15,6 @@ export class ProductListComponent{
   constructor(private productKeyboardCommonService: ProductKeyboardCommonService) {
   }
 
-
-  //TODO: この辺はライブラリ検討時に再考
   goKeyboard(num: number){
     // 実装例：Storageから読み出し
     // キーボードタイプを設定
@@ -31,6 +29,7 @@ export class ProductListComponent{
 
 }
 
+// キーボード入力内容保存のためのクラス
 class saveData {
   private static _instance: saveData;
   public keyboardCommon:KeyboardCommon = new KeyboardCommon();
