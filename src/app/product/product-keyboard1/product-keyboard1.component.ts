@@ -5,7 +5,6 @@ import { ModalComponent } from '../modal/modal.component';
 import { ModalService } from '../../shared/services/modal.service';
 import { ProductKeyboardCommonService } from '../../shared/services/product-keyboard-common.service';
 import { Subscription } from 'rxjs';
-//import { MatDialogModule } from '@angular/material';
 
 @Component({
   selector: 'app-product-keyboard1',
@@ -32,7 +31,6 @@ export class ProductKeyboard1Component implements OnInit {
 
   ngOnInit() {
     this.keyboardCommonStrings = new KeyboardCommonStrings();
-    //this.matDialogModule = new MatDialogModule();
     this.currentKeyboard = 0;
     this.keyboardCommon = this.productKeyboardCommonService.dataInit();
     // モーダルダイアログを閉じる際のイベント処理
