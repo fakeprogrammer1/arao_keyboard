@@ -121,7 +121,7 @@ export class KeyboardCommon {
     readonly alphabetLists = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
     readonly numberLists1 = ['1','2','3','4','5','6','7','8','9','0'];
     readonly numberLists2 = this.numberLists1.concat(['-',' ']);
-    readonly charsLists = ['会議室','通路','窓','東','西','南','北','側','事務所','部屋','前','打合せ','廊下','横','空調','換気','屋','課','部'];
+    readonly charsLists = ['会議室','通路','窓','東','西','南','北','側','事務所','部屋','前','打合せ','廊下','横','空調','換気','室','課','部'];
     
     readonly keyboard = [[this.kanaLists, this.alphabetCapitalLists1,this.numberLists1],// サービス店
                          [this.kanaLists, this.alphabetCapitalLists1,this.numberLists1],// 販売店
