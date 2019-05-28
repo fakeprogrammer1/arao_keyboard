@@ -9,6 +9,8 @@ export class KeyboardCommon {
     inputstring: string;        //表示文字列
     errorcode: number;          //errorcode ０:正常
     private saveInputString: any[9] = ['','','','','','','','',''];
+    list2 = ['通路','部屋','廊下','空調','換気'];
+    list3 = ['会議室','事務所','打合せ'];
     bleArray =[' ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
                '0','1','2','3','4','5','6','7','8','9','-','/','(',')','.',',','゛','゜',
                'ｱ','ｲ','ｳ','ｴ','ｵ','ｶ','ｷ','ｸ','ｹ','ｺ','ｻ','ｼ','ｽ','ｾ','ｿ','ﾀ','ﾁ','ﾂ','ﾃ','ﾄ','ﾅ','ﾆ','ﾇ','ﾈ','ﾉ','ﾊ','ﾋ','ﾌ','ﾍ','ﾎ','ﾏ','ﾐ','ﾑ','ﾒ','ﾓ','ﾔ','ﾕ','ﾖ','ﾗ','ﾘ','ﾙ','ﾚ','ﾛ','ﾜ','ｦ','ﾝ',
@@ -63,14 +65,12 @@ export class KeyboardCommon {
 
      countNextCharChunk(str: string){
          var str3 = str.slice(0,3)
-         var list3 = ['会議室','事務所','打合せ'];
-         if(list3.indexOf(str3) >= 0){
+         if(this.list3.indexOf(str3) >= 0){
              return 3;
          }
          
          var str2 = str.slice(0,2)
-         var list2 = ['通路','部屋','廊下','空調','換気'];
-         if(list2.indexOf(str2) >= 0){
+         if(this.list2.indexOf(str2) >= 0){
              return 2;
          }
          
@@ -78,15 +78,13 @@ export class KeyboardCommon {
      }
      
      countLastCharChunk(str: string){
-         var str3 = str.slice(-3)
-         var list3 = ['会議室','事務所','打合せ'];
-         if(list3.indexOf(str3) >= 0){
+         var str3 = str.slice(-3);
+         if(this.list3.indexOf(str3) >= 0){
              return 3;
          }
          
-         var str2 = str.slice(-2)
-         var list2 = ['通路','部屋','廊下','空調','換気'];
-         if(list2.indexOf(str2) >= 0){
+         var str2 = str.slice(-2);
+         if(this.list2.indexOf(str2) >= 0){
              return 2;
          }
          
