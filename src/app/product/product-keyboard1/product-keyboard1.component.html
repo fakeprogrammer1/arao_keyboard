@@ -1,36 +1,38 @@
 <body>
     <ng-container *ngComponentOutlet="modal"></ng-container>
-    <div id="araoHeader">
-        <span class="araotitle">{{ productKeyboardCommonService.keyboardTypeInfoList[productKeyboardCommonService.keyboardType].keyboardTitle | translate }}</span>
+    <div id="Header">
+        <span class="title">{{ keyboardCommonStrings.keyboardTypeInfoList[productKeyboardCommonService.keyboardType].keyboardTitle | translate }}</span>
 
         <div class="footer">
-            <div class="araotextbox">{{ keyboardCommon.inputstring }}</div>
+            <div class="textbox">{{ keyboardCommon.getInputString() }}</div>
         </div>
-        <div class="footer">
-            <div class="araobutton gray" (click)="delCharactor()" translate> CustomKeyboardDelete </div>
-            <span class="araobutton gray" (click)="delAllString()" translate> CustomKeyboardDeleteAll </span>
+        <div class="rightfooter">
+            <span class="button gray" (click)="delAllString()" translate> CustomKeyboardDeleteAll </span>
+            <div class="button gray" (click)="delCharactor()" translate> CustomKeyboardDelete </div>
         </div>
         
         <div class="footer">
-          <ng-container *ngFor="let i of keyboardCommonStrings.keyboardPattern[productKeyboardCommonService.keyboardType]; index as j">
-               <span *ngIf="currentKeyboard == j" class="araotub active">{{ i | translate }}</span>
-               <span *ngIf="currentKeyboard != j" class="araotub nonactive" (click)="setCurrentKeyboard(j)">{{ i | translate }}</span>
+          <ng-container *ngFor="let i of keyboardCommonStrings.keyboardTypeInfoList[productKeyboardCommonService.keyboardType].keyboardPattern; index as j">
+               <span *ngIf="currentKeyboard == j" class="tub active">{{ i | translate }}</span>
+               <span *ngIf="currentKeyboard != j" class="tub nonactive" (click)="setCurrentKeyboard(j)">{{ i | translate }}</span>
            </ng-container>
         </div>
     </div>
     
-    <div id="araoContent">
-        <div class="footer">
-            <span class="araobutton gray" (click)="addCharactor(keyboardCommonStrings.keyboard[productKeyboardCommonService.keyboardType][currentKeyboard][j])" *ngFor="let i of keyboardCommonStrings.keyboard[productKeyboardCommonService.keyboardType][currentKeyboard]; index as j">
+    <div id="Content">
+        <div class="footerchar">
+            <span class="button char" (click)="addCharactor(i)" *ngFor="let i of keyboardCommonStrings.keyboardTypeInfoList[productKeyboardCommonService.keyboardType].keyboardStr[currentKeyboard]">
                 {{ i }}
             </span>
         </div>
 
-        <div class="button">
-            <div class="button" (click)="save()"routerLink="/products">OK</div>
-        </div>
-        <div class="button">
-            <div class="button" routerLink="/products" translate> CommonCancel </div>
+        <div class="footer">
+            <div class="button">
+                <div class="button" routerLink="/products" translate> CommonCancel </div>
+           </div>
+           <div class="button">
+                <div class="button" (click)="save()"routerLink="/products">OK</div>
+           </div>
         </div>
     </div>
 </body>

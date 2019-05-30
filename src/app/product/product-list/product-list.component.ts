@@ -1,6 +1,5 @@
 import { Component} from '@angular/core';
 import { KeyboardCommon } from '../../shared/models/product-Keyboard-Common';
-import { KeyboardCommonStrings } from '../../shared/models/product-Keyboard-Common';
 import { ProductKeyboardCommonService } from '../../shared/services/product-keyboard-common.service';
 
 @Component({
@@ -8,38 +7,39 @@ import { ProductKeyboardCommonService } from '../../shared/services/product-keyb
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
+/*! @class  ProductListComponent
+    @brief  MELCOキーボードの切替を管理する
+*/
 export class ProductListComponent{
-  keyboardCommonStrings:KeyboardCommonStrings;
-  sd = saveData.getInstance();
-  //s; //テスト用変数
-  constructor(private productKeyboardCommonService: ProductKeyboardCommonService) {
+  keyboardType: number = 0;
+
+  constructor(private productKeyboardCommonService: ProductKeyboardCommonService,
+              private keyboardCommon: KeyboardCommon) {
   }
 
-  goKeyboard(num: number){
-    // 実装例：Storageから読み出し
+  /**
+   * @brief キーボード種別を設定する
+   * @param num(in) キーボード種別
+   * @return -
+   * @detail 
+   */
+  goKeyboard(num: number): void{
     // キーボードタイプを設定
     this.productKeyboardCommonService.setKeyboardType(num);
-    this.productKeyboardCommonService.dataImport(this.sd.keyboardCommon); 
-    
-    // 以下BLE通信テスト用コード
-    //this.s = this.sd.keyboardCommon.convertBLEArray("A0会議室d空調");
-    //alert(this.s);
-    
+    this.keyboardType = num;
+
+    //以下BLE通信用変換テスト用コード
+    //this.getInputArray();
   }
 
-}
-
-// キーボード入力内容保存のためのクラス
-class saveData {
-  private static _instance: saveData;
-  public keyboardCommon:KeyboardCommon = new KeyboardCommon();
-
-  public static getInstance():saveData {
-    if (!this._instance){
-      this._instance = new saveData();
-    }
-    
-    return this._instance;
+  /**
+   * @brief テスト用関数
+   * @param -
+   * @return -
+   * @detail 入力された文字列をBLE通信用コードに変換しalertで表示する。
+   */
+  getInputArray(){
+    alert(this.productKeyboardCommonService.convertBLEArray(this.keyboardCommon.getSaveInputString(this.keyboardType)));
   }
-  
+
 }
