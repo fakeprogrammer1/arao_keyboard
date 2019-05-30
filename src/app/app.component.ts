@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'arao-keyboard';
+  title = 'keyboard';
   
   constructor(private translate: TranslateService){
     // ƒuƒ‰ƒEƒU‚ÌŒ¾Œêİ’èæ“¾
