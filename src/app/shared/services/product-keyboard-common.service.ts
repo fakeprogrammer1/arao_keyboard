@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 /*! @class  ProductKeyboardCommonService
-    @brief  MELCOキーボードを呼び出す
+    @brief  MELCOキーボードの種別を管理する
 */
 export class ProductKeyboardCommonService {
   keyboardType: number;
