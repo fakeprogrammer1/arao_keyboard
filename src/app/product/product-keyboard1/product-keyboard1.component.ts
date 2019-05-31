@@ -116,7 +116,7 @@ export class ProductKeyboard1Component implements OnInit, OnDestroy {
 
     if(this.productKeyboardCommonService.keyboardType == 8 && this.keyboardCommon.getInputString().length == 0){
       //TODO デフォルトの名前を設定するか確認するダイアログ
-      confirm("デフォルトの名称を使用します\nよろしいですか？");
+      confirm("CustomKeyboardUseDefaultBleDeviceName");
     }
     this.keyboardCommon.setSaveInputString(this.productKeyboardCommonService.keyboardType);
   }
