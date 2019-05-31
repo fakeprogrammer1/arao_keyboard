@@ -193,9 +193,9 @@ export class KeyboardCommonStrings {
   readonly alphabetCapitalLists = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
   readonly alphabetCapitalLists1 = this.alphabetCapitalLists.concat(['-','/','(',')']);
   readonly alphabetCapitalLists2 = this.alphabetCapitalLists.concat([' ','-']);
-  readonly alphabetCapitalLists3 = this.alphabetCapitalLists.concat(['-','/','(',')','!','"','#','$','%','&','\'','*','+',':',';','<','=','>','?','[','\\',']','^','_','`','{','|','}',' ']);
+  readonly alphabetCapitalLists3 = this.alphabetCapitalLists.concat(['-','/','(',')','!','.',',','"','#','$','%','&','*','+',':',';','=','>','?','[',']','^','_','`','{','|','}',' ']);
   readonly alphabetLists = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-  readonly numberLists1 = ['1','2','3','4','5','6','7','8','9','0'];
+  readonly numberLists1 = ['0','1','2','3','4','5','6','7','8','9'];
   readonly numberLists2 = this.numberLists1.concat(['-',' ']);
   readonly charsLists = ['会議室','通路','窓','東','西','南','北','側','事務所','部屋','前','打合せ','廊下','横','空調','換気','室','課','部'];
   
