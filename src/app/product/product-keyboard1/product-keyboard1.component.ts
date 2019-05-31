@@ -4,6 +4,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { ModalService } from '../../shared/services/modal.service';
 import { ProductKeyboardCommonService } from '../../shared/services/product-keyboard-common.service';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-keyboard1',
@@ -22,7 +23,8 @@ export class ProductKeyboard1Component implements OnInit, OnDestroy {
   constructor(
     private productKeyboardCommonService: ProductKeyboardCommonService,
     private modalService: ModalService,
-    private keyboardCommon:KeyboardCommon)
+    private keyboardCommon:KeyboardCommon,
+    private translateService: TranslateService)
    {
    }
 
@@ -116,7 +118,7 @@ export class ProductKeyboard1Component implements OnInit, OnDestroy {
 
     if(this.productKeyboardCommonService.keyboardType == 8 && this.keyboardCommon.getInputString().length == 0){
       //TODO デフォルトの名前を設定するか確認するダイアログ
-      confirm("CustomKeyboardUseDefaultBleDeviceName");
+      confirm(this.translateService.instant('CustomKeyboardUseDefaultBleDeviceName'));
     }
     this.keyboardCommon.setSaveInputString(this.productKeyboardCommonService.keyboardType);
   }
