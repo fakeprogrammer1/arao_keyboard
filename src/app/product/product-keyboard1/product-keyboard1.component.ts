@@ -1,9 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KeyboardCommon } from '../../shared/models/product-Keyboard-Common';
-import { ModalComponent } from '../modal/modal.component';
-import { ModalService } from '../../shared/services/modal.service';
 import { ProductKeyboardCommonService } from '../../shared/services/product-keyboard-common.service';
-import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -14,15 +11,12 @@ import { TranslateService } from '@ngx-translate/core';
 /*! @class  ProductKeyboard1Component
     @brief  キーボードに表示する情報を管理する
 */
-export class ProductKeyboard1Component implements OnInit, OnDestroy {
+export class ProductKeyboard1Component implements OnInit{
   keyboardCommonStrings:KeyboardCommonStrings = new KeyboardCommonStrings();
   currentKeyboard: number = 0;
-  modal = null;
-  subscription: Subscription;
   
   constructor(
     private productKeyboardCommonService: ProductKeyboardCommonService,
-    private modalService: ModalService,
     private keyboardCommon:KeyboardCommon,
     private translateService: TranslateService)
    {
@@ -36,16 +30,6 @@ export class ProductKeyboard1Component implements OnInit, OnDestroy {
       // 入力しようとした文字列がキーボード既定の最大値を超える場合は空を設定
       this.keyboardCommon.setInputString('');
     }
-    // モーダルダイアログを閉じる際のイベント処理
-    this.subscription = this.modalService.closeEventObservable.subscribe(
-      () => {
-        this.modal = null;
-      }
-    );
-  }
-  
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   /**
@@ -77,8 +61,9 @@ export class ProductKeyboard1Component implements OnInit, OnDestroy {
       // 文字列に追加
       this.keyboardCommon.setInputString(tmpstr);
     }else{
-      // 規定文字数超えの場合のモーダル画面表示
-      this.modal = ModalComponent;
+      // TODO 規定文字数超えの場合のモーダル画面表示
+      // alertダイアログで対応
+      alert(this.translateService.instant('CustomKeyboardNomoreCharacterAdded'));
     }
   }
 
